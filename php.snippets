@@ -17,7 +17,12 @@ def get_autoload_paths():
 
 	if not config['autoload']['psr-4']: return []
 
-	return config['autoload']['psr-4']
+	paths = config['autoload']['psr-4']
+
+	if config['autoload-dev'] and config['autoload-dev']['psr-4']:
+		 paths.update(config['autoload-dev']['psr-4'])
+
+	return paths
 
 def class_name_from_file():
 	return re.match(r'.*(?=\.)', fn).group()
