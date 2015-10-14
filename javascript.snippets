@@ -1,0 +1,55 @@
+snippet desc "jasmine describe" b
+describe('$1', () => {
+	$0
+});
+endsnippet
+
+snippet before "jasmine beforeEach" b
+beforeEach(() => {
+	$0
+});
+endsnippet
+
+snippet it "jasmine it" b
+it('$1', () => {
+	$0
+});
+endsnippet
+
+snippet ita "jasmine in async" b
+it('$1', done => {
+	$0
+});
+endsnippet
+
+snippet tobe "jasmine expect to be" b
+expect($1).toBe($2);
+endsnippet
+
+snippet toeq "jasmine expect to equal" b
+expect($1).toEqual($2);
+endsnippet
+
+snippet to "jasmine expect" b
+expect($1).to$2($3);
+endsnippet
+
+snippet imp "import"
+import {$1} from '$2';
+endsnippet
+
+snippet fn "function"
+function $1($2) {
+	$0
+}
+endsnippet
+
+snippet () "lambda"
+($1) => $0
+endsnippet
+
+snippet {} "multi line lambda"
+($1) => {
+	$0
+}
+endsnippet

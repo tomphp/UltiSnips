@@ -1,0 +1,49 @@
+snippet desc "rspec describe" b
+describe('$1', () => {
+	$0
+});
+endsnippet
+
+snippet before "rspec before" b
+before do
+	$0
+end
+endsnippet
+
+snippet it "rspec it" b
+it '$1' do
+	$0
+end
+endsnippet
+
+snippet let "rspect let" b
+let(:$1) { $2 }
+endsnippet
+
+snippet letb "rspect let block" b
+let(:$1) do
+	$2
+end
+endsnippet
+
+snippet toeq "rspec expect to eq" b
+expect($1).to eq($2);
+endsnippet
+
+snippet torec "rspec expect to receive" b
+expect($1).to receive($2);
+endsnippet
+
+snippet to "rspec expect" b
+expect($1).to $2($3);
+endsnippet
+
+snippet !to "rspec expect not to" b
+expect($1).not_to $2($3);
+endsnippet
+
+snippet init "initialize" b
+def initialize
+	$0
+end
+endsnippet
