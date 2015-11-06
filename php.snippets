@@ -13,13 +13,12 @@ def read_composer_json():
 def get_autoload_paths():
 	config = read_composer_json()
 
-	if not config['autoload']: return []
-
-	if not config['autoload']['psr-4']: return []
+	if 'autoload' not in config: return []
+	if 'psr-4' not in config['autoload']: return []
 
 	paths = config['autoload']['psr-4']
 
-	if config['autoload-dev'] and config['autoload-dev']['psr-4']:
+	if 'autoload-dev' in config and 'psr-4' in config['autoload-dev']:
 		 paths.update(config['autoload-dev']['psr-4'])
 
 	return paths
@@ -154,6 +153,10 @@ trait `!p snip.rv = class_name_from_file()`
 }
 endsnippet
 
+snippet $t "this"
+$this->${0}
+endsnippet
+
 snippet class "class" b
 final class ${1:`!p snip.rv = class_name_from_file()`}
 {
@@ -255,10 +258,57 @@ public function get${2:`!p snip.rv = t[1] if is_custom_type(t[1]) else ''`}()
 endsnippet
 
 snippet it "phpspec test" b
-public function it_${1}(${2})
+function it_${1}(${2})
 {
 	$0
 }
+endsnippet
+
+snippet let "phpspec let" b
+function let(${1})
+{
+	$0
+}
+endsnippet
+
+snippet bcw "phpspec beConstructedWith" b
+$this->beConstructedWith(${1});
+endsnippet
+
+snippet bct "phpspec beConstructed[Named]" b
+$this->beConstructed${1}(${2});
+endsnippet
+
+snippet ->sr "phpspec shouldReturn" i
+->shouldReturn(${1});
+endsnippet
+
+snippet ->sb "phpspec shouldBe" i
+->shouldBe(${1});
+endsnippet
+
+snippet ->sbl "phpspec shouldBeLike" i
+->shouldBeLike(${1});
+endsnippet
+
+snippet ->shbc "phpspec shouldHaveBeenCalled" i
+->shouldHaveBeenCalled(${1});
+endsnippet
+
+snippet ->snhbc "phpspec shouldNotHaveBeenCalled" i
+->shouldNotHaveBeenCalled(${1});
+endsnippet
+
+snippet ->sbc "phpspec shouldBeCalled" i
+->shouldBeCalled(${1});
+endsnippet
+
+snippet ->snbc "phpspec shouldNotBeCalled" i
+->shouldNotBeCalled(${1});
+endsnippet
+
+snippet ->wr "phpspec willReturn" i
+->willReturn(${1});
 endsnippet
 
 snippet map "array map" b
