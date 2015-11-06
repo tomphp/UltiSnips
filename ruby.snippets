@@ -1,7 +1,13 @@
 snippet desc "rspec describe" b
-describe('$1', () => {
+describe '$1' do
 	$0
-});
+end
+endsnippet
+
+snippet cont "rspec context" b
+context '$1' do
+	$0
+end
 endsnippet
 
 snippet before "rspec before" b
@@ -27,23 +33,27 @@ end
 endsnippet
 
 snippet toeq "rspec expect to eq" b
-expect($1).to eq($2);
+expect($1).to eq $2
 endsnippet
 
 snippet torec "rspec expect to receive" b
-expect($1).to receive($2);
+expect($1).to receive(:$2)
 endsnippet
 
 snippet to "rspec expect" b
-expect($1).to $2($3);
+expect($1).to $2
 endsnippet
 
 snippet !to "rspec expect not to" b
-expect($1).not_to $2($3);
+expect($1).not_to $2
 endsnippet
 
 snippet init "initialize" b
 def initialize
 	$0
 end
+endsnippet
+
+snippet li "assign local variable to instance" b
+@$1 = $1
 endsnippet
