@@ -28,7 +28,7 @@ def class_name_from_file():
 
 def get_namespace():
 	dir_path = os.path.dirname(path) + '/'
-	for ns, fp in get_autoload_paths().iteritems():
+	for ns, fp in get_autoload_paths().items():
 		m = re.search(r'' + re.escape(fp) + '(.*)', dir_path)
 		if m: return (ns.strip('\\') + '\\' + m.group(1).replace('/', '\\')).strip('\\')
 
@@ -46,7 +46,7 @@ def uppercase_first(string):
 	return string[0].upper() + string[1:]
 
 def split_arg_and_type(arg):
-	parts = map(lambda s: s.strip(), arg.strip().split(' '))
+	parts = list(map(lambda s: s.strip(), arg.strip().split(' ')))
 
 	if len(parts) != 2:
 		return ['mixed', parts[0]]
@@ -58,7 +58,7 @@ def generate_properties(args):
 
 	if args:
 		args = args.split(',')
-		args = map(split_arg_and_type, args)
+		args = list(map(split_arg_and_type, args))
 	else: 
 		args = []
 
@@ -74,7 +74,7 @@ def set_fields_from_arguments(args):
 
 	if args:
 		args = args.split(',')
-		args = map(split_arg_and_type, args)
+		args = list(map(split_arg_and_type, args))
 	else: 
 		args = []
 
@@ -89,10 +89,11 @@ def docblock(args):
 
 	if args:
 		args = args.split(',')
-		args = map(split_arg_and_type, args)
+		args = list(map(split_arg_and_type, args))
 	else: 
 		args = []
 
+	from functools import reduce
 	max_type_len = reduce(lambda curr, arg: len(arg[0]) if len(arg[0]) > curr else curr, args, 0)
 
 	block = ''
