@@ -1,0 +1,57 @@
+global !p
+def get_namespace():
+	parts = path.split("/")
+	del parts[0]
+	ns = '.'.join(parts)
+	ns = ns.strip(".clj")
+	ns = ns.replace("_", "-")
+
+	return ns
+
+def get_top_level_ns(ns):
+	return ns.split(".")[-1]
+endglobal
+
+snippet ns "clojure namespace" b
+(ns "`!p snip.rv = get_namespace()`"$0)
+endsnippet
+
+snippet req "ns :require block" b
+(:require $0)
+endsnippet
+
+snippet ras "require :as"
+[$1 :as ${2:`!p snip.rv = get_top_level_ns(t[1])`}]
+endsnippet
+
+snippet rall "require :refer :all"
+[$1 :refer :all]
+endsnippet
+
+snippet rref "require :refer"
+[$1 :refer ($2)]
+endsnippet
+
+snippet defn "define function"
+(defn $1
+  [$2]
+  $3)
+endsnippet
+
+snippet defn- "define function"
+(defn- $1
+  [$2]
+  $3)
+endsnippet
+
+snippet const "define function"
+(def :^const $1 $2)
+endsnippet
+
+snippet def "define function"
+(def $1 $2)
+endsnippet
+
+snippet def- "define function"
+(def :^private $1 $2)
+endsnippet
