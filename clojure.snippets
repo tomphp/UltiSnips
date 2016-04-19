@@ -1,9 +1,14 @@
 global !p
+def rchop(thestring, ending):
+  if thestring.endswith(ending):
+    return thestring[:-len(ending)]
+  return thestring
+
 def get_namespace():
 	parts = path.split("/")
 	del parts[0]
 	ns = '.'.join(parts)
-	ns = ns.strip(".clj")
+	ns = rchop(ns, ".clj")
 	ns = ns.replace("_", "-")
 
 	return ns
@@ -13,7 +18,7 @@ def get_top_level_ns(ns):
 endglobal
 
 snippet ns "clojure namespace" b
-(ns "`!p snip.rv = get_namespace()`"$0)
+(ns `!p snip.rv = get_namespace()`$0)
 endsnippet
 
 snippet req "ns :require block" b
@@ -45,11 +50,11 @@ snippet defn- "define function"
 endsnippet
 
 snippet const "define function"
-(def :^const $1 $2)
+(def ^:const $1 $2)
 endsnippet
 
 snippet const- "define function"
-(def :^private :^const $1 $2)
+(def ^:private ^:const $1 $2)
 endsnippet
 
 snippet def "define function"
@@ -57,5 +62,20 @@ snippet def "define function"
 endsnippet
 
 snippet def- "define function"
-(def :^private $1 $2)
+(def ^:private $1 $2)
+endsnippet
+
+snippet desc "speclj describe" b
+(describe "$1"
+  $2)
+endsnippet
+
+snippet context "speclj context" b
+(context "$1"
+  $2)
+endsnippet
+
+snippet it "speclj it" b
+(it "$1"
+  $2)
 endsnippet
